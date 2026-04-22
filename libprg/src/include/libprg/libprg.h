@@ -4,7 +4,7 @@
 #include <stdlib.h>
 
 /* =========================
-   PILHA DINÂMICA
+            PILHA
    ========================= */
 typedef struct {
     int *dados;
@@ -22,7 +22,7 @@ void pilha_destruir(pilha_t *p);
 
 
 /* =========================
-   FILA DINÂMICA
+            FILA
    ========================= */
 typedef struct {
     int *dados;
@@ -42,7 +42,7 @@ void fila_destruir(fila_t *f);
 
 
 /* =========================
-   LISTA DINÂMICA
+            LISTA
    ========================= */
 typedef struct {
     int *dados;
