@@ -1,79 +1,70 @@
 #ifndef LIBPRG_LIBPRG_H
 #define LIBPRG_LIBPRG_H
 
-#include <stdio.h>
 #include <stdlib.h>
 
-
 /* =========================
-   PILHA
+   PILHA DINÂMICA
    ========================= */
-
-typedef struct NoPilha {
-    void *dado;
-    struct NoPilha *prox;
-} NoPilha;
-
-typedef struct Pilha {
-    NoPilha *topo;
-    int tamanho;
+typedef struct {
+    int *dados;
+    int topo;
+    int capacidade;
 } Pilha;
 
 Pilha* pilha_criar();
-void pilha_empilhar(Pilha *p, void *dado);
-void* pilha_desempilhar(Pilha *p);
-void* pilha_topo(Pilha *p);
+void pilha_empilhar(Pilha *p, int valor);
+int pilha_desempilhar(Pilha *p);
+int pilha_topo(Pilha *p);
 int pilha_vazia(Pilha *p);
 int pilha_tamanho(Pilha *p);
 void pilha_destruir(Pilha *p);
 
 
 /* =========================
-   FILA
+   FILA DINÂMICA
    ========================= */
-
-typedef struct NoFila {
-    void *dado;
-    struct NoFila *prox;
-} NoFila;
-
-typedef struct Fila {
-    NoFila *inicio;
-    NoFila *fim;
+typedef struct {
+    int *dados;
+    int inicio;
+    int fim;
     int tamanho;
+    int capacidade;
 } Fila;
 
 Fila* fila_criar();
-void fila_enfileirar(Fila *f, void *dado);
-void* fila_desenfileirar(Fila *f);
-void* fila_inicio(Fila *f);
+void fila_enfileirar(Fila *f, int valor);
+int fila_desenfileirar(Fila *f);
+int fila_inicio(Fila *f);
 int fila_vazia(Fila *f);
 int fila_tamanho(Fila *f);
 void fila_destruir(Fila *f);
 
 
 /* =========================
-   LISTA ENCADEADA
+   LISTA DINÂMICA
    ========================= */
-
-typedef struct NoLista {
-    void *dado;
-    struct NoLista *prox;
-} NoLista;
-
-typedef struct Lista {
-    NoLista *cabeca;
+typedef struct {
+    int *dados;
     int tamanho;
+    int capacidade;
 } Lista;
 
 Lista* lista_criar();
-void lista_inserir_inicio(Lista *l, void *dado);
-void lista_inserir_fim(Lista *l, void *dado);
-void* lista_remover_inicio(Lista *l);
-void* lista_remover_fim(Lista *l);
-void* lista_obter(Lista *l, int indice);
-int lista_tamanho(Lista *l);
+void lista_inserir_fim(Lista *l, int valor);
+void lista_inserir_inicio(Lista *l, int valor);
+void lista_inserir_indice(Lista *l, int indice, int valor);
+
+int lista_remover_fim(Lista *l);
+int lista_remover_inicio(Lista *l);
+int lista_remover_indice(Lista *l, int indice);
+
+int lista_obter(Lista *l, int indice);
+void lista_definir(Lista *l, int indice, int valor);
+
 int lista_vazia(Lista *l);
+int lista_tamanho(Lista *l);
+
 void lista_destruir(Lista *l);
 
 #endif

@@ -1,6 +1,19 @@
 #include "libprg/libprg.h"
 
 /* =========================
+   FUNÇÃO AUXILIAR
+   ========================= */
+static void aumentar_capacidade(int **dados, int *capacidade) {
+    int nova_capacidade = (*capacidade == 0) ? 4 : (*capacidade * 2);
+
+    int *novo = (int*) realloc(*dados, nova_capacidade * sizeof(int));
+    if (!novo) return; // falhou realloc, ignora
+
+    *dados = novo;
+    *capacidade = nova_capacidade;
+}
+
+/* =========================
    PILHA
    ========================= */
 
@@ -8,116 +21,108 @@ Pilha* pilha_criar() {
     Pilha *p = (Pilha*) malloc(sizeof(Pilha));
     if (!p) return NULL;
 
-    p->topo = NULL;
-    p->tamanho = 0;
+    p->dados = NULL;
+    p->topo = -1;
+    p->capacidade = 0;
+
     return p;
 }
 
-void pilha_empilhar(Pilha *p, void *dado) {
+void pilha_empilhar(Pilha *p, int valor) {
     if (!p) return;
 
-    NoPilha *no = (NoPilha*) malloc(sizeof(NoPilha));
-    if (!no) return;
+    if (p->topo + 1 >= p->capacidade) {
+        aumentar_capacidade(&p->dados, &p->capacidade);
+    }
 
-    no->dado = dado;
-    no->prox = p->topo;
-    p->topo = no;
-    p->tamanho++;
+    p->dados[++p->topo] = valor;
 }
 
-void* pilha_desempilhar(Pilha *p) {
-    if (!p || p->topo == NULL) return NULL;
-
-    NoPilha *temp = p->topo;
-    void *dado = temp->dado;
-
-    p->topo = temp->prox;
-    free(temp);
-
-    p->tamanho--;
-    return dado;
+int pilha_desempilhar(Pilha *p) {
+    if (!p || p->topo < 0) return -1;
+    return p->dados[p->topo--];
 }
 
-void* pilha_topo(Pilha *p) {
-    if (!p || p->topo == NULL) return NULL;
-    return p->topo->dado;
+int pilha_topo(Pilha *p) {
+    if (!p || p->topo < 0) return -1;
+    return p->dados[p->topo];
 }
 
 int pilha_vazia(Pilha *p) {
-    return (!p || p->tamanho == 0);
+    return (!p || p->topo < 0);
 }
 
 int pilha_tamanho(Pilha *p) {
     if (!p) return 0;
-    return p->tamanho;
+    return p->topo + 1;
 }
 
 void pilha_destruir(Pilha *p) {
     if (!p) return;
 
-    while (p->topo != NULL) {
-        pilha_desempilhar(p);
-    }
-
+    free(p->dados);
     free(p);
 }
 
-
 /* =========================
-   FILA
+   FILA (circular)
    ========================= */
 
 Fila* fila_criar() {
     Fila *f = (Fila*) malloc(sizeof(Fila));
     if (!f) return NULL;
 
-    f->inicio = NULL;
-    f->fim = NULL;
+    f->dados = NULL;
+    f->inicio = 0;
+    f->fim = 0;
     f->tamanho = 0;
+    f->capacidade = 0;
+
     return f;
 }
 
-void fila_enfileirar(Fila *f, void *dado) {
-    if (!f) return;
+static void fila_aumentar(Fila *f) {
+    int nova_capacidade = (f->capacidade == 0) ? 4 : (f->capacidade * 2);
 
-    NoFila *no = (NoFila*) malloc(sizeof(NoFila));
-    if (!no) return;
+    int *novo = (int*) malloc(nova_capacidade * sizeof(int));
+    if (!novo) return;
 
-    no->dado = dado;
-    no->prox = NULL;
-
-    if (f->fim == NULL) {
-        f->inicio = no;
-        f->fim = no;
-    } else {
-        f->fim->prox = no;
-        f->fim = no;
+    for (int i = 0; i < f->tamanho; i++) {
+        novo[i] = f->dados[(f->inicio + i) % f->capacidade];
     }
 
+    free(f->dados);
+    f->dados = novo;
+    f->capacidade = nova_capacidade;
+    f->inicio = 0;
+    f->fim = f->tamanho;
+}
+
+void fila_enfileirar(Fila *f, int valor) {
+    if (!f) return;
+
+    if (f->tamanho >= f->capacidade) {
+        fila_aumentar(f);
+    }
+
+    f->dados[f->fim] = valor;
+    f->fim = (f->fim + 1) % f->capacidade;
     f->tamanho++;
 }
 
-void* fila_desenfileirar(Fila *f) {
-    if (!f || f->inicio == NULL) return NULL;
+int fila_desenfileirar(Fila *f) {
+    if (!f || f->tamanho == 0) return -1;
 
-    NoFila *temp = f->inicio;
-    void *dado = temp->dado;
-
-    f->inicio = temp->prox;
-
-    if (f->inicio == NULL) {
-        f->fim = NULL;
-    }
-
-    free(temp);
+    int valor = f->dados[f->inicio];
+    f->inicio = (f->inicio + 1) % f->capacidade;
     f->tamanho--;
 
-    return dado;
+    return valor;
 }
 
-void* fila_inicio(Fila *f) {
-    if (!f || f->inicio == NULL) return NULL;
-    return f->inicio->dado;
+int fila_inicio(Fila *f) {
+    if (!f || f->tamanho == 0) return -1;
+    return f->dados[f->inicio];
 }
 
 int fila_vazia(Fila *f) {
@@ -132,113 +137,116 @@ int fila_tamanho(Fila *f) {
 void fila_destruir(Fila *f) {
     if (!f) return;
 
-    while (f->inicio != NULL) {
-        fila_desenfileirar(f);
-    }
-
+    free(f->dados);
     free(f);
 }
 
-
 /* =========================
-   LISTA ENCADEADA
+   LISTA
    ========================= */
 
 Lista* lista_criar() {
     Lista *l = (Lista*) malloc(sizeof(Lista));
     if (!l) return NULL;
 
-    l->cabeca = NULL;
+    l->dados = NULL;
     l->tamanho = 0;
+    l->capacidade = 0;
+
     return l;
 }
 
-void lista_inserir_inicio(Lista *l, void *dado) {
+static void lista_aumentar(Lista *l) {
+    aumentar_capacidade(&l->dados, &l->capacidade);
+}
+
+void lista_inserir_fim(Lista *l, int valor) {
     if (!l) return;
 
-    NoLista *no = (NoLista*) malloc(sizeof(NoLista));
-    if (!no) return;
+    if (l->tamanho >= l->capacidade) {
+        lista_aumentar(l);
+    }
 
-    no->dado = dado;
-    no->prox = l->cabeca;
+    l->dados[l->tamanho++] = valor;
+}
 
-    l->cabeca = no;
+void lista_inserir_inicio(Lista *l, int valor) {
+    if (!l) return;
+
+    if (l->tamanho >= l->capacidade) {
+        lista_aumentar(l);
+    }
+
+    for (int i = l->tamanho; i > 0; i--) {
+        l->dados[i] = l->dados[i - 1];
+    }
+
+    l->dados[0] = valor;
     l->tamanho++;
 }
 
-void lista_inserir_fim(Lista *l, void *dado) {
+void lista_inserir_indice(Lista *l, int indice, int valor) {
     if (!l) return;
+    if (indice < 0 || indice > l->tamanho) return;
 
-    NoLista *no = (NoLista*) malloc(sizeof(NoLista));
-    if (!no) return;
-
-    no->dado = dado;
-    no->prox = NULL;
-
-    if (l->cabeca == NULL) {
-        l->cabeca = no;
-    } else {
-        NoLista *atual = l->cabeca;
-        while (atual->prox != NULL) {
-            atual = atual->prox;
-        }
-        atual->prox = no;
+    if (l->tamanho >= l->capacidade) {
+        lista_aumentar(l);
     }
 
+    for (int i = l->tamanho; i > indice; i--) {
+        l->dados[i] = l->dados[i - 1];
+    }
+
+    l->dados[indice] = valor;
     l->tamanho++;
 }
 
-void* lista_remover_inicio(Lista *l) {
-    if (!l || l->cabeca == NULL) return NULL;
-
-    NoLista *temp = l->cabeca;
-    void *dado = temp->dado;
-
-    l->cabeca = temp->prox;
-    free(temp);
-
-    l->tamanho--;
-    return dado;
+int lista_remover_fim(Lista *l) {
+    if (!l || l->tamanho == 0) return -1;
+    return l->dados[--l->tamanho];
 }
 
-void* lista_remover_fim(Lista *l) {
-    if (!l || l->cabeca == NULL) return NULL;
+int lista_remover_inicio(Lista *l) {
+    if (!l || l->tamanho == 0) return -1;
 
-    NoLista *atual = l->cabeca;
-    NoLista *anterior = NULL;
+    int valor = l->dados[0];
 
-    while (atual->prox != NULL) {
-        anterior = atual;
-        atual = atual->prox;
+    for (int i = 0; i < l->tamanho - 1; i++) {
+        l->dados[i] = l->dados[i + 1];
     }
 
-    void *dado = atual->dado;
-
-    if (anterior == NULL) {
-        l->cabeca = NULL;
-    } else {
-        anterior->prox = NULL;
-    }
-
-    free(atual);
     l->tamanho--;
-
-    return dado;
+    return valor;
 }
 
-void* lista_obter(Lista *l, int indice) {
-    if (!l || indice < 0 || indice >= l->tamanho) return NULL;
+int lista_remover_indice(Lista *l, int indice) {
+    if (!l || l->tamanho == 0) return -1;
+    if (indice < 0 || indice >= l->tamanho) return -1;
 
-    NoLista *atual = l->cabeca;
-    int i = 0;
+    int valor = l->dados[indice];
 
-    while (atual != NULL) {
-        if (i == indice) return atual->dado;
-        atual = atual->prox;
-        i++;
+    for (int i = indice; i < l->tamanho - 1; i++) {
+        l->dados[i] = l->dados[i + 1];
     }
 
-    return NULL;
+    l->tamanho--;
+    return valor;
+}
+
+int lista_obter(Lista *l, int indice) {
+    if (!l) return -1;
+    if (indice < 0 || indice >= l->tamanho) return -1;
+    return l->dados[indice];
+}
+
+void lista_definir(Lista *l, int indice, int valor) {
+    if (!l) return;
+    if (indice < 0 || indice >= l->tamanho) return;
+    l->dados[indice] = valor;
+}
+
+int lista_vazia(Lista *l) {
+    return (!l || l->tamanho == 0);
 }
 
 int lista_tamanho(Lista *l) {
@@ -246,16 +254,9 @@ int lista_tamanho(Lista *l) {
     return l->tamanho;
 }
 
-int lista_vazia(Lista *l) {
-    return (!l || l->tamanho == 0);
-}
-
 void lista_destruir(Lista *l) {
     if (!l) return;
 
-    while (l->cabeca != NULL) {
-        lista_remover_inicio(l);
-    }
-
+    free(l->dados);
     free(l);
 }
