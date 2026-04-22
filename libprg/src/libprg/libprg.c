@@ -17,8 +17,8 @@ static void aumentar_capacidade(int **dados, int *capacidade) {
    PILHA
    ========================= */
 
-Pilha* pilha_criar() {
-    Pilha *p = (Pilha*) malloc(sizeof(Pilha));
+pilha_t* pilha_criar() {
+    pilha_t *p = (pilha_t*) malloc(sizeof(pilha_t));
     if (!p) return NULL;
 
     p->dados = NULL;
@@ -28,7 +28,7 @@ Pilha* pilha_criar() {
     return p;
 }
 
-void pilha_empilhar(Pilha *p, int valor) {
+void pilha_empilhar(pilha_t *p, int valor) {
     if (!p) return;
 
     if (p->topo + 1 >= p->capacidade) {
@@ -38,26 +38,26 @@ void pilha_empilhar(Pilha *p, int valor) {
     p->dados[++p->topo] = valor;
 }
 
-int pilha_desempilhar(Pilha *p) {
+int pilha_desempilhar(pilha_t *p) {
     if (!p || p->topo < 0) return -1;
     return p->dados[p->topo--];
 }
 
-int pilha_topo(Pilha *p) {
+int pilha_topo(pilha_t *p) {
     if (!p || p->topo < 0) return -1;
     return p->dados[p->topo];
 }
 
-int pilha_vazia(Pilha *p) {
+int pilha_vazia(pilha_t *p) {
     return (!p || p->topo < 0);
 }
 
-int pilha_tamanho(Pilha *p) {
+int pilha_tamanho(pilha_t *p) {
     if (!p) return 0;
     return p->topo + 1;
 }
 
-void pilha_destruir(Pilha *p) {
+void pilha_destruir(pilha_t *p) {
     if (!p) return;
 
     free(p->dados);
@@ -68,8 +68,8 @@ void pilha_destruir(Pilha *p) {
    FILA (circular)
    ========================= */
 
-Fila* fila_criar() {
-    Fila *f = (Fila*) malloc(sizeof(Fila));
+fila_t* fila_criar() {
+    fila_t *f = (fila_t*) malloc(sizeof(fila_t));
     if (!f) return NULL;
 
     f->dados = NULL;
@@ -81,7 +81,7 @@ Fila* fila_criar() {
     return f;
 }
 
-static void fila_aumentar(Fila *f) {
+static void fila_aumentar(fila_t *f) {
     int nova_capacidade = (f->capacidade == 0) ? 4 : (f->capacidade * 2);
 
     int *novo = (int*) malloc(nova_capacidade * sizeof(int));
@@ -98,7 +98,7 @@ static void fila_aumentar(Fila *f) {
     f->fim = f->tamanho;
 }
 
-void fila_enfileirar(Fila *f, int valor) {
+void fila_enfileirar(fila_t *f, int valor) {
     if (!f) return;
 
     if (f->tamanho >= f->capacidade) {
@@ -110,7 +110,7 @@ void fila_enfileirar(Fila *f, int valor) {
     f->tamanho++;
 }
 
-int fila_desenfileirar(Fila *f) {
+int fila_desenfileirar(fila_t *f) {
     if (!f || f->tamanho == 0) return -1;
 
     int valor = f->dados[f->inicio];
@@ -120,21 +120,21 @@ int fila_desenfileirar(Fila *f) {
     return valor;
 }
 
-int fila_inicio(Fila *f) {
+int fila_inicio(fila_t *f) {
     if (!f || f->tamanho == 0) return -1;
     return f->dados[f->inicio];
 }
 
-int fila_vazia(Fila *f) {
+int fila_vazia(fila_t *f) {
     return (!f || f->tamanho == 0);
 }
 
-int fila_tamanho(Fila *f) {
+int fila_tamanho(fila_t *f) {
     if (!f) return 0;
     return f->tamanho;
 }
 
-void fila_destruir(Fila *f) {
+void fila_destruir(fila_t *f) {
     if (!f) return;
 
     free(f->dados);
@@ -145,8 +145,8 @@ void fila_destruir(Fila *f) {
    LISTA
    ========================= */
 
-Lista* lista_criar() {
-    Lista *l = (Lista*) malloc(sizeof(Lista));
+lista_t* lista_criar() {
+    lista_t *l = (lista_t*) malloc(sizeof(lista_t));
     if (!l) return NULL;
 
     l->dados = NULL;
@@ -156,11 +156,11 @@ Lista* lista_criar() {
     return l;
 }
 
-static void lista_aumentar(Lista *l) {
+static void lista_aumentar(lista_t *l) {
     aumentar_capacidade(&l->dados, &l->capacidade);
 }
 
-void lista_inserir_fim(Lista *l, int valor) {
+void lista_inserir_fim(lista_t *l, int valor) {
     if (!l) return;
 
     if (l->tamanho >= l->capacidade) {
@@ -170,7 +170,7 @@ void lista_inserir_fim(Lista *l, int valor) {
     l->dados[l->tamanho++] = valor;
 }
 
-void lista_inserir_inicio(Lista *l, int valor) {
+void lista_inserir_inicio(lista_t *l, int valor) {
     if (!l) return;
 
     if (l->tamanho >= l->capacidade) {
@@ -185,7 +185,7 @@ void lista_inserir_inicio(Lista *l, int valor) {
     l->tamanho++;
 }
 
-void lista_inserir_indice(Lista *l, int indice, int valor) {
+void lista_inserir_indice(lista_t *l, int indice, int valor) {
     if (!l) return;
     if (indice < 0 || indice > l->tamanho) return;
 
@@ -201,12 +201,12 @@ void lista_inserir_indice(Lista *l, int indice, int valor) {
     l->tamanho++;
 }
 
-int lista_remover_fim(Lista *l) {
+int lista_remover_fim(lista_t *l) {
     if (!l || l->tamanho == 0) return -1;
     return l->dados[--l->tamanho];
 }
 
-int lista_remover_inicio(Lista *l) {
+int lista_remover_inicio(lista_t *l) {
     if (!l || l->tamanho == 0) return -1;
 
     int valor = l->dados[0];
@@ -219,7 +219,7 @@ int lista_remover_inicio(Lista *l) {
     return valor;
 }
 
-int lista_remover_indice(Lista *l, int indice) {
+int lista_remover_indice(lista_t *l, int indice) {
     if (!l || l->tamanho == 0) return -1;
     if (indice < 0 || indice >= l->tamanho) return -1;
 
@@ -233,28 +233,28 @@ int lista_remover_indice(Lista *l, int indice) {
     return valor;
 }
 
-int lista_obter(Lista *l, int indice) {
+int lista_obter(lista_t *l, int indice) {
     if (!l) return -1;
     if (indice < 0 || indice >= l->tamanho) return -1;
     return l->dados[indice];
 }
 
-void lista_definir(Lista *l, int indice, int valor) {
+void lista_definir(lista_t *l, int indice, int valor) {
     if (!l) return;
     if (indice < 0 || indice >= l->tamanho) return;
     l->dados[indice] = valor;
 }
 
-int lista_vazia(Lista *l) {
+int lista_vazia(lista_t *l) {
     return (!l || l->tamanho == 0);
 }
 
-int lista_tamanho(Lista *l) {
+int lista_tamanho(lista_t *l) {
     if (!l) return 0;
     return l->tamanho;
 }
 
-void lista_destruir(Lista *l) {
+void lista_destruir(lista_t *l) {
     if (!l) return;
 
     free(l->dados);
