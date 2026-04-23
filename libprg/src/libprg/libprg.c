@@ -14,7 +14,7 @@ static void aumentar_capacidade(int **dados, int *capacidade) {
 }
 
 /* =========================
-   PILHA
+            PILHA
    ========================= */
 
 pilha_t* pilha_criar() {
@@ -65,7 +65,7 @@ void pilha_destruir(pilha_t *p) {
 }
 
 /* =========================
-   FILA (circular)
+            FILA
    ========================= */
 
 fila_t* fila_criar() {
@@ -142,7 +142,7 @@ void fila_destruir(fila_t *f) {
 }
 
 /* =========================
-   LISTA
+            LISTA
    ========================= */
 
 lista_t* lista_criar() {
