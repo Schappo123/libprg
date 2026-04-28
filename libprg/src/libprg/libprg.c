@@ -260,3 +260,5 @@ void lista_destruir(lista_t *l) {
     free(l->dados);
     free(l);
 }
+
+//
