@@ -1,7 +1,6 @@
 #ifndef LIBPRG_LIBPRG_H
 #define LIBPRG_LIBPRG_H
 
-#include <stdlib.h>
 
 /* =========================
             PILHA
@@ -50,23 +49,33 @@ typedef struct {
     int capacidade;
 } lista_t;
 
-lista_t* lista_criar();
-void lista_inserir_fim(lista_t *l, int valor);
-void lista_inserir_inicio(lista_t *l, int valor);
-void lista_inserir_indice(lista_t *l, int indice, int valor);
+lista_t* lista_linear_criar();
+void lista_linear_inserir_fim(lista_t *l, int valor);
+void lista_linear_inserir_inicio(lista_t *l, int valor);
+void lista_linear_inserir_indice(lista_t *l, int indice, int valor);
 
-int lista_remover_fim(lista_t *l);
-int lista_remover_inicio(lista_t *l);
-int lista_remover_indice(lista_t *l, int indice);
+int lista_linear_remover_fim(lista_t *l);
+int lista_linear_remover_inicio(lista_t *l);
+int lista_linear_remover_indice(lista_t *l, int indice);
 
-int lista_obter(lista_t *l, int indice);
-void lista_definir(lista_t *l, int indice, int valor);
+int lista_linear_obter(lista_t *l, int indice);
+void lista_linear_definir(lista_t *l, int indice, int valor);
 
-int lista_vazia(lista_t *l);
-int lista_tamanho(lista_t *l);
+int lista_linear_vazia(lista_t *l);
+int lista_linear_tamanho(lista_t *l);
 
-void lista_destruir(lista_t *l);
+void lista_linear_destruir(lista_t *l);
 
-//
+/* =========================
+        LISTA ENCADEADA
+   ========================= */
+
+typedef struct {
+    int dados;
+    struct no_t *proximo;
+} no_t;
+
+no_t* lista_encadeada_criar (int dado);
+void lista_encadeada_inserir (no_t *inicio, int valor);
 
 #endif
