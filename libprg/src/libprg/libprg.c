@@ -1,13 +1,14 @@
 #include "libprg/libprg.h"
-#include "stdlib.h"
+#include <stdlib.h>
+#include <stdbool.h>
 
 /* =========================
-   FUNÇÃO AUXILIAR
+        FUNÇÃO AUXILIAR
    ========================= */
 static void aumentar_capacidade(int **dados, int *capacidade) {
     int nova_capacidade = (*capacidade == 0) ? 4 : (*capacidade * 2);
 
-    int *novo = (int*) realloc(*dados, nova_capacidade * sizeof(int));
+    int *novo = realloc(*dados, nova_capacidade * sizeof(int));
     if (!novo) return;
 
     *dados = novo;
@@ -49,7 +50,7 @@ int pilha_topo(pilha_t *p) {
     return p->dados[p->topo];
 }
 
-int pilha_vazia(pilha_t *p) {
+bool pilha_vazia(pilha_t *p) {
     return (!p || p->topo < 0);
 }
 
@@ -85,11 +86,13 @@ fila_t* fila_criar() {
 static void fila_aumentar(fila_t *f) {
     int nova_capacidade = (f->capacidade == 0) ? 4 : (f->capacidade * 2);
 
-    int *novo = (int*) malloc(nova_capacidade * sizeof(int));
+    int *novo = malloc(nova_capacidade * sizeof(int));
     if (!novo) return;
 
-    for (int i = 0; i < f->tamanho; i++) {
-        novo[i] = f->dados[(f->inicio + i) % f->capacidade];
+    if (f->capacidade > 0) {
+        for (int i = 0; i < f->tamanho; i++) {
+            novo[i] = f->dados[(f->inicio + i) % f->capacidade];
+        }
     }
 
     free(f->dados);
@@ -126,7 +129,7 @@ int fila_inicio(fila_t *f) {
     return f->dados[f->inicio];
 }
 
-int fila_vazia(fila_t *f) {
+bool fila_vazia(fila_t *f) {
     return (!f || f->tamanho == 0);
 }
 
@@ -157,97 +160,23 @@ lista_t* lista_linear_criar() {
     return l;
 }
 
-static void lista_linear_aumentar(lista_t *l) {
-    aumentar_capacidade(&l->dados, &l->capacidade);
-}
-
-void lista_linear_inserir_fim(lista_t *l, int valor) {
+void lista_linear_inserir(lista_t *l, int valor) {
     if (!l) return;
 
     if (l->tamanho >= l->capacidade) {
-        lista_linear_aumentar(l);
+        aumentar_capacidade(&l->dados, &l->capacidade);
     }
 
     l->dados[l->tamanho++] = valor;
 }
 
-void lista_linear_inserir_inicio(lista_t *l, int valor) {
-    if (!l) return;
-
-    if (l->tamanho >= l->capacidade) {
-        lista_linear_aumentar(l);
-    }
-
-    for (int i = l->tamanho; i > 0; i--) {
-        l->dados[i] = l->dados[i - 1];
-    }
-
-    l->dados[0] = valor;
-    l->tamanho++;
-}
-
-void lista_linear_inserir_indice(lista_t *l, int indice, int valor) {
-    if (!l) return;
-    if (indice < 0 || indice > l->tamanho) return;
-
-    if (l->tamanho >= l->capacidade) {
-        lista_linear_aumentar(l);
-    }
-
-    for (int i = l->tamanho; i > indice; i--) {
-        l->dados[i] = l->dados[i - 1];
-    }
-
-    l->dados[indice] = valor;
-    l->tamanho++;
-}
-
-int lista_linear_remover_fim(lista_t *l) {
+int lista_linear_remover(lista_t *l) {
     if (!l || l->tamanho == 0) return -1;
     return l->dados[--l->tamanho];
 }
 
-int lista_linear_remover_inicio(lista_t *l) {
-    if (!l || l->tamanho == 0) return -1;
-
-    int valor = l->dados[0];
-
-    for (int i = 0; i < l->tamanho - 1; i++) {
-        l->dados[i] = l->dados[i + 1];
-    }
-
-    l->tamanho--;
-    return valor;
-}
-
-int lista_linear_remover_indice(lista_t *l, int indice) {
-    if (!l || l->tamanho == 0) return -1;
-    if (indice < 0 || indice >= l->tamanho) return -1;
-
-    int valor = l->dados[indice];
-
-    for (int i = indice; i < l->tamanho - 1; i++) {
-        l->dados[i] = l->dados[i + 1];
-    }
-
-    l->tamanho--;
-    return valor;
-}
-
-int lista_linear_obter(lista_t *l, int indice) {
-    if (!l) return -1;
-    if (indice < 0 || indice >= l->tamanho) return -1;
-    return l->dados[indice];
-}
-
-void lista_linear_definir(lista_t *l, int indice, int valor) {
-    if (!l) return;
-    if (indice < 0 || indice >= l->tamanho) return;
-    l->dados[indice] = valor;
-}
-
-int lista_linear_vazia(lista_t *l) {
-    return (!l || l->tamanho == 0);
+bool lista_linear_vazia(lista_t *l) {
+    return !l || l->tamanho == 0;
 }
 
 int lista_linear_tamanho(lista_t *l) {
@@ -266,17 +195,42 @@ void lista_linear_destruir(lista_t *l) {
         LISTA ENCADEADA
    ========================= */
 
-no_t* lista_encadeada_criar (int dado) {
-    no_t *no = malloc(sizeof(no_t));
-    no->dados = dado;
-    no->proximo = NULL;
-
-    return no;
+no_t* lista_encadeada_criar() {
+    return NULL;
 }
 
-void lista_encadeada_inserir (no_t **inicio, int valor) {
-    no_t *novo = lista_encadeada_criar(valor);
+void lista_encadeada_inserir(no_t **inicio, int valor) {
+    if (!inicio) return;
+
+    no_t *novo = malloc(sizeof(no_t));
+    if (!novo) return;
+
+    novo->dados = valor;
     novo->proximo = *inicio;
+
     *inicio = novo;
 }
 
+int lista_encadeada_remover(no_t **inicio) {
+    if (!inicio || *inicio == NULL) return -1;
+
+    no_t *temp = *inicio;
+    int valor = temp->dados;
+
+    *inicio = temp->proximo;
+    free(temp);
+
+    return valor;
+}
+
+bool lista_encadeada_vazia(no_t *inicio) {
+    return inicio == NULL;
+}
+
+void lista_encadeada_destruir(no_t **inicio) {
+    if (!inicio) return;
+
+    while (*inicio != NULL) {
+        lista_encadeada_remover(inicio);
+    }
+}
