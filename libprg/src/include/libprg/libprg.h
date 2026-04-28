@@ -70,12 +70,12 @@ void lista_linear_destruir(lista_t *l);
         LISTA ENCADEADA
    ========================= */
 
-typedef struct {
+typedef struct no{
     int dados;
-    struct no_t *proximo;
+    struct no *proximo;
 } no_t;
 
 no_t* lista_encadeada_criar (int dado);
-void lista_encadeada_inserir (no_t *inicio, int valor);
+void lista_encadeada_inserir (no_t **inicio, int valor);
 
 #endif

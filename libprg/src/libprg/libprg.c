@@ -274,6 +274,9 @@ no_t* lista_encadeada_criar (int dado) {
     return no;
 }
 
-void lista_encadeada_inserir (no_t *inicio, int valor) {
-
+void lista_encadeada_inserir (no_t **inicio, int valor) {
+    no_t *novo = lista_encadeada_criar(valor);
+    novo->proximo = *inicio;
+    *inicio = novo;
 }
+
