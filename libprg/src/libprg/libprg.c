@@ -142,7 +142,7 @@ void fila_destruir(fila_t *f) {
 }
 
 /* =========================
-            LISTA
+        LISTA LINEAR
    ========================= */
 
 lista_t* lista_criar() {

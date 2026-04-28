@@ -42,7 +42,7 @@ void fila_destruir(fila_t *f);
 
 
 /* =========================
-            LISTA
+        LISTA LINEAR
    ========================= */
 typedef struct {
     int *dados;
