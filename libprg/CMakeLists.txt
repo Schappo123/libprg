@@ -1,14 +1,24 @@
 cmake_minimum_required(VERSION 3.21)
 
 set(HEADERS
-        "${CMAKE_CURRENT_LIST_DIR}/src/include/libprg/estruturas.h"
+        "${CMAKE_CURRENT_LIST_DIR}/src/include/libprg/libprg.h"
+        src/libprg/pilha.c
+        src/libprg/fila.c
+        src/libprg/lista_linear.c
+        src/libprg/lista_encadeada.c
 )
 
 set(SOURCES
-        "${CMAKE_CURRENT_LIST_DIR}/src/libprg/estruturas.c"
+        src/libprg/pilha.c
+        src/libprg/fila.c
+        src/libprg/lista_linear.c
+        src/libprg/lista_encadeada.c
 )
 
-add_library(libprg ${SOURCES} ${HEADERS})
+add_library(libprg ${SOURCES} ${HEADERS}
+        src/libprg/fila.c
+        src/libprg/lista_linear.c
+        src/libprg/lista_encadeada.c)
 
 target_include_directories(libprg PUBLIC
         ${CMAKE_CURRENT_LIST_DIR}/src/include
