@@ -71,7 +71,6 @@ no_t* lista_encadeada_criar();
 void lista_encadeada_inserir(no_t **inicio, int valor);
 int lista_encadeada_remover(no_t **inicio);
 no_t* lista_encadeada_buscar (no_t *inicio, int elemento);
-bool lista_encadeada_vazia(no_t *inicio);
 void lista_encadeada_destruir(no_t **inicio);
 
 #endif

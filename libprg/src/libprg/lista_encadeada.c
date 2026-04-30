@@ -43,10 +43,6 @@ no_t* lista_encadeada_buscar(no_t *inicio, int elemento) {
     return NULL;
 }
 
-bool lista_encadeada_vazia(no_t *inicio) {
-    return inicio == NULL;
-}
-
 void lista_encadeada_destruir(no_t **inicio) {
     if (!inicio) return;
 
