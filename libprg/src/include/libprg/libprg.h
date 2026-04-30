@@ -53,7 +53,7 @@ typedef struct {
 lista_t* lista_linear_criar();
 void lista_linear_inserir(lista_t *l, int valor);
 int lista_linear_remover(lista_t *l);
-int buscar (lista_t *lista, int elemento);
+int lista_linear_buscar (lista_t *lista, int elemento);
 bool lista_linear_vazia(lista_t *l);
 int lista_linear_tamanho(lista_t *l);
 void lista_linear_destruir(lista_t *l);
@@ -69,7 +69,7 @@ typedef struct no {
 
 no_t* lista_encadeada_criar();
 void lista_encadeada_inserir(no_t **inicio, int valor);
-int lista_encadeada_remover(no_t **inicio);
+bool lista_encadeada_remover(no_t **inicio, int elemento);
 no_t* lista_encadeada_buscar (no_t *inicio, int elemento);
 void lista_encadeada_destruir(no_t **inicio);
 

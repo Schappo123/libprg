@@ -21,16 +21,26 @@ void lista_encadeada_inserir(no_t **inicio, int valor) {
     *inicio = novo;
 }
 
-int lista_encadeada_remover(no_t **inicio) {
-    if (!inicio || *inicio == NULL) return -1;
+bool lista_encadeada_remover(no_t **inicio, int elemento) {
+    if (inicio == NULL || *inicio == NULL) return false;
 
-    no_t *temp = *inicio;
-    int valor = temp->dados;
+    no_t *atual = *inicio;
+    no_t *anterior = NULL;
 
-    *inicio = temp->proximo;
-    free(temp);
+    while (atual != NULL && atual->dados != elemento) {
+        anterior = atual;
+        atual = atual->proximo;
+    }
 
-    return valor;
+    if (atual == NULL) return false;
+
+    if (anterior == NULL) {
+        *inicio = atual->proximo;
+    } else {
+        anterior->proximo = atual->proximo;
+    }
+    free(atual);
+    return true;
 }
 
 no_t* lista_encadeada_buscar(no_t *inicio, int elemento) {
@@ -44,9 +54,15 @@ no_t* lista_encadeada_buscar(no_t *inicio, int elemento) {
 }
 
 void lista_encadeada_destruir(no_t **inicio) {
-    if (!inicio) return;
+    if (inicio == NULL) return;
 
-    while (*inicio != NULL) {
-        lista_encadeada_remover(inicio);
+    no_t *atual = *inicio;
+    no_t *proximo;
+
+    while (atual != NULL) {
+        proximo = atual->proximo;
+        free(atual);
+        atual = proximo;
     }
+    *inicio = NULL;
 }

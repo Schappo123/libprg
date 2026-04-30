@@ -45,7 +45,7 @@ int lista_linear_remover(lista_t *l) {
     return l->dados[--l->tamanho];
 }
 
-int buscar (lista_t *lista, int elemento) {
+int lista_linear_buscar (lista_t *lista, int elemento) {
     for (int i = 0; i < lista->tamanho; i++) {
         if (lista->dados[i] == elemento) return i;
     }
