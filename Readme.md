@@ -14,9 +14,9 @@ An example to demonstrate how to organize files for writing a library in the C l
     `-- src
         |-- include
         |   `-- libprg
-        |       `-- libprg.h
+        |       `-- estruturas.h
         `-- libprg
-            |-- libprg.c
+            |-- estruturas.c
             |-- sub.c
             `-- sum.c
 ```

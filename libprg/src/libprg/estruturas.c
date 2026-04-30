@@ -1,4 +1,4 @@
-#include "libprg/libprg.h"
+#include "libprg/estruturas.h"
 #include <stdlib.h>
 #include <stdbool.h>
 

@@ -1,5 +1,5 @@
-#ifndef LIBPRG_LIBPRG_H
-#define LIBPRG_LIBPRG_H
+#ifndef LIBPRG_ESTRUTURAS_H
+#define LIBPRG_ESTRUTURAS_H
 
 #include <stdbool.h>
 
