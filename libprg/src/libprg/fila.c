@@ -1,6 +1,10 @@
 #include <stdlib.h>
 #include "libprg/libprg.h"
 
+/* =========================
+            FILA
+   ========================= */
+
 fila_t* fila_criar() {
     fila_t *f = malloc(sizeof(fila_t));
     if (!f) return NULL;

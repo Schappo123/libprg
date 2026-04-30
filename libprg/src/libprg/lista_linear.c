@@ -4,6 +4,7 @@
 /* =========================
 FUNÇÃO AUXILIAR
    ========================= */
+
 static void aumentar_capacidade(int **dados, int *capacidade) {
     int nova_capacidade = (*capacidade == 0) ? 4 : (*capacidade * 2);
 
@@ -42,6 +43,13 @@ void lista_linear_inserir(lista_t *l, int valor) {
 int lista_linear_remover(lista_t *l) {
     if (!l || l->tamanho == 0) return -1;
     return l->dados[--l->tamanho];
+}
+
+int buscar (lista_t *lista, int elemento) {
+    for (int i = 0; i < lista->tamanho; i++) {
+        if (lista->dados[i] == elemento) return i;
+    }
+    return -1;
 }
 
 bool lista_linear_vazia(lista_t *l) {

@@ -1,5 +1,4 @@
 #include <stdlib.h>
-
 #include "libprg/libprg.h"
 
 /* =========================
@@ -32,6 +31,16 @@ int lista_encadeada_remover(no_t **inicio) {
     free(temp);
 
     return valor;
+}
+
+no_t* lista_encadeada_buscar(no_t *inicio, int elemento) {
+    no_t *atual = inicio;
+
+    while (atual != NULL) {
+        if (atual->dados == elemento) return atual;
+        atual = atual->proximo;
+    }
+    return NULL;
 }
 
 bool lista_encadeada_vazia(no_t *inicio) {
