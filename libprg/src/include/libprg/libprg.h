@@ -73,4 +73,20 @@ bool lista_encadeada_remover(no_t **inicio, int elemento);
 no_t* lista_encadeada_buscar (no_t *inicio, int elemento);
 void lista_encadeada_destruir(no_t **inicio);
 
+/* =========================
+    LISTA ENCADEADA DUPLA
+   ========================= */
+
+typedef struct nod {
+    int dados;
+    struct nod *proximo;
+    struct nod *anterior;
+} nod_t;
+
+nod_t* lista_encadeada_dupla_criar ();
+void lista_encadeada_dupla_inserir (nod_t **inicio, int valor);
+bool lista_encadeada_dupla_remover (nod_t **inicio);
+nod_t* lista_encadeada_dupla_buscar (nod_t *inicio, int elemento);
+void lista_encadeada_dupla_destruir (nod_t **inicio);
+
 #endif

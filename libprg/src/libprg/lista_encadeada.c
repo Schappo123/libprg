@@ -5,15 +5,12 @@
         LISTA ENCADEADA
    ========================= */
 
-no_t* lista_encadeada_criar() {
+no_t *lista_encadeada_criar() {
     return NULL;
 }
 
 void lista_encadeada_inserir(no_t **inicio, int valor) {
-    if (!inicio) return;
-
     no_t *novo = malloc(sizeof(no_t));
-    if (!novo) return;
 
     novo->dados = valor;
     novo->proximo = *inicio;
@@ -22,8 +19,6 @@ void lista_encadeada_inserir(no_t **inicio, int valor) {
 }
 
 bool lista_encadeada_remover(no_t **inicio, int elemento) {
-    if (inicio == NULL || *inicio == NULL) return false;
-
     no_t *atual = *inicio;
     no_t *anterior = NULL;
 
@@ -31,8 +26,6 @@ bool lista_encadeada_remover(no_t **inicio, int elemento) {
         anterior = atual;
         atual = atual->proximo;
     }
-
-    if (atual == NULL) return false;
 
     if (anterior == NULL) {
         *inicio = atual->proximo;
@@ -43,7 +36,7 @@ bool lista_encadeada_remover(no_t **inicio, int elemento) {
     return true;
 }
 
-no_t* lista_encadeada_buscar(no_t *inicio, int elemento) {
+no_t *lista_encadeada_buscar(no_t *inicio, int elemento) {
     no_t *atual = inicio;
 
     while (atual != NULL) {
@@ -54,7 +47,6 @@ no_t* lista_encadeada_buscar(no_t *inicio, int elemento) {
 }
 
 void lista_encadeada_destruir(no_t **inicio) {
-    if (inicio == NULL) return;
 
     no_t *atual = *inicio;
     no_t *proximo;

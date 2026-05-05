@@ -9,7 +9,6 @@ static void aumentar_capacidade(int **dados, int *capacidade) {
     int nova_capacidade = (*capacidade == 0) ? 4 : (*capacidade * 2);
 
     int *novo = realloc(*dados, nova_capacidade * sizeof(int));
-    if (!novo) return;
 
     *dados = novo;
     *capacidade = nova_capacidade;
@@ -21,7 +20,6 @@ static void aumentar_capacidade(int **dados, int *capacidade) {
 
 lista_t* lista_linear_criar() {
     lista_t *l = malloc(sizeof(lista_t));
-    if (!l) return NULL;
 
     l->dados = NULL;
     l->tamanho = 0;
@@ -31,8 +29,6 @@ lista_t* lista_linear_criar() {
 }
 
 void lista_linear_inserir(lista_t *l, int valor) {
-    if (!l) return;
-
     if (l->tamanho >= l->capacidade) {
         aumentar_capacidade(&l->dados, &l->capacidade);
     }
@@ -41,7 +37,6 @@ void lista_linear_inserir(lista_t *l, int valor) {
 }
 
 int lista_linear_remover(lista_t *l) {
-    if (!l || l->tamanho == 0) return -1;
     return l->dados[--l->tamanho];
 }
 
@@ -53,17 +48,14 @@ int lista_linear_buscar (lista_t *lista, int elemento) {
 }
 
 bool lista_linear_vazia(lista_t *l) {
-    return !l || l->tamanho == 0;
+    return l->tamanho == 0;
 }
 
 int lista_linear_tamanho(lista_t *l) {
-    if (!l) return 0;
     return l->tamanho;
 }
 
 void lista_linear_destruir(lista_t *l) {
-    if (!l) return;
-
     free(l->dados);
     free(l);
 }
