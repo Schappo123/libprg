@@ -12,7 +12,7 @@ typedef struct {
     int capacidade;
 } pilha_t;
 
-pilha_t* pilha_criar();
+pilha_t *pilha_criar();
 void pilha_empilhar(pilha_t *p, int valor);
 int pilha_desempilhar(pilha_t *p);
 int pilha_topo(pilha_t *p);
@@ -32,7 +32,7 @@ typedef struct {
     int capacidade;
 } fila_t;
 
-fila_t* fila_criar();
+fila_t *fila_criar();
 void fila_enfileirar(fila_t *f, int valor);
 int fila_desenfileirar(fila_t *f);
 int fila_inicio(fila_t *f);
@@ -50,7 +50,7 @@ typedef struct {
     int capacidade;
 } lista_t;
 
-lista_t* lista_linear_criar();
+lista_t *lista_linear_criar();
 void lista_linear_inserir(lista_t *l, int valor);
 int lista_linear_remover(lista_t *l);
 int lista_linear_buscar (lista_t *lista, int elemento);
@@ -67,26 +67,32 @@ typedef struct no {
     struct no *proximo;
 } no_t;
 
-no_t* lista_encadeada_criar();
-void lista_encadeada_inserir(no_t **inicio, int valor);
+typedef struct lista_encadeada {
+    no_t *inicio;
+    bool ordenada;
+} lista_encadeada_t;
+
+no_t *criar_no();
+lista_encadeada_t* lista_encadeada_criar(bool ordenada);
+void lista_encadeada_inserir(lista_encadeada_t *lista, int valor);
 bool lista_encadeada_remover(no_t **inicio, int elemento);
-no_t* lista_encadeada_buscar (no_t *inicio, int elemento);
+no_t *lista_encadeada_buscar (no_t *inicio, int elemento);
 void lista_encadeada_destruir(no_t **inicio);
+
 
 /* =========================
     LISTA ENCADEADA DUPLA
    ========================= */
-
 typedef struct nod {
     int dados;
     struct nod *proximo;
     struct nod *anterior;
 } nod_t;
 
-nod_t* lista_encadeada_dupla_criar ();
+nod_t *lista_encadeada_dupla_criar ();
 void lista_encadeada_dupla_inserir (nod_t **inicio, int valor);
 bool lista_encadeada_dupla_remover (nod_t **inicio);
-nod_t* lista_encadeada_dupla_buscar (nod_t *inicio, int elemento);
+nod_t *lista_encadeada_dupla_buscar (nod_t *inicio, int elemento);
 void lista_encadeada_dupla_destruir (nod_t **inicio);
 
 #endif

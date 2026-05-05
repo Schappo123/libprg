@@ -5,7 +5,7 @@
     LISTA ENCADEADA DUPLA
    ========================= */
 
-nod_t* lista_encadeada_dupla_criar () {
+nod_t *lista_encadeada_dupla_criar () {
     return NULL;
 }
 

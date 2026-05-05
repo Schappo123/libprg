@@ -5,17 +5,24 @@
         LISTA ENCADEADA
    ========================= */
 
-no_t *lista_encadeada_criar() {
+no_t *criar_no() {
     return NULL;
 }
 
-void lista_encadeada_inserir(no_t **inicio, int valor) {
-    no_t *novo = malloc(sizeof(no_t));
+lista_encadeada_t* lista_encadeada_criar(bool ordenada) {
+    lista_encadeada_t* lista = malloc(sizeof(lista_encadeada_t));
+    lista->inicio = NULL;
+    lista->ordenada = ordenada;
 
-    novo->dados = valor;
-    novo->proximo = *inicio;
+    return lista;
+}
 
-    *inicio = novo;
+void lista_encadeada_inserir(lista_encadeada_t *lista, int valor) {
+    no_t *novo = criar_no(valor);
+
+    novo->proximo = lista->inicio;
+    lista->inicio = novo;
+
 }
 
 bool lista_encadeada_remover(no_t **inicio, int elemento) {
