@@ -60,28 +60,32 @@ void lista_linear_destruir(lista_t *l);
 
 
 /* =========================
-        LISTA ENCADEADA
+  LISTA ENCADEADA NÃO ORDENADA
    ========================= */
 typedef struct no {
     int dados;
     struct no *proximo;
 } no_t;
 
-typedef struct lista_encadeada {
-    no_t *inicio;
-    bool ordenada;
-} lista_encadeada_t;
-
-no_t *criar_no();
-lista_encadeada_t* lista_encadeada_criar(bool ordenada);
-void lista_encadeada_inserir(lista_encadeada_t *lista, int valor);
-bool lista_encadeada_remover(no_t **inicio, int elemento);
-no_t *lista_encadeada_buscar (no_t *inicio, int elemento);
+no_t *lista_encadeada_criar();
+void lista_encadeada_inserir(no_t **inicio, int valor);
+bool lista_encadeada_remover(no_t **inicio, int valor);
+no_t *lista_encadeada_buscar(no_t *inicio, int valor);
 void lista_encadeada_destruir(no_t **inicio);
+
+/* =========================
+   LISTA ENCADEADA ORDENADA
+   ========================= */
+
+no_t *lista_encadeada_ordenada_criar();
+void lista_encadeada_ordenada_inserir(no_t **inicio, int valor);
+bool lista_encadeada_ordenada_remover(no_t **inicio, int valor);
+no_t *lista_encadeada_ordenada_buscar(no_t *inicio, int valor);
+void lista_encadeada_ordenada_destruir(no_t **inicio);
 
 
 /* =========================
-    LISTA ENCADEADA DUPLA
+LISTA ENCADEADA DUPLA NÃO ORDENADA
    ========================= */
 typedef struct nod {
     int dados;
@@ -89,10 +93,21 @@ typedef struct nod {
     struct nod *anterior;
 } nod_t;
 
-nod_t *lista_encadeada_dupla_criar ();
-void lista_encadeada_dupla_inserir (nod_t **inicio, int valor);
-bool lista_encadeada_dupla_remover (nod_t **inicio);
-nod_t *lista_encadeada_dupla_buscar (nod_t *inicio, int elemento);
-void lista_encadeada_dupla_destruir (nod_t **inicio);
+nod_t *lista_encadeada_dupla_criar();
+void lista_encadeada_dupla_inserir(nod_t **inicio, int valor);
+bool lista_encadeada_dupla_remover(nod_t **inicio, int valor);
+nod_t *lista_encadeada_dupla_buscar(nod_t *inicio, int valor);
+void lista_encadeada_dupla_destruir(nod_t **inicio);
+
+/* =========================
+LISTA ENCADEADA DUPLA ORDENADA
+   ========================= */
+
+nod_t *lista_encadeada_dupla_ordenada_criar();
+void lista_encadeada_dupla_ordenada_inserir(nod_t **inicio, int valor);
+bool lista_encadeada_dupla_ordenada_remover(nod_t **inicio, int valor);
+nod_t *lista_encadeada_dupla_ordenada_buscar(nod_t *inicio, int valor);
+void lista_encadeada_dupla_ordenada_destruir(nod_t **inicio);
+
 
 #endif
