@@ -110,4 +110,11 @@ nod_t *lista_encadeada_dupla_ordenada_buscar(nod_t *inicio, int valor);
 void lista_encadeada_dupla_ordenada_destruir(nod_t **inicio);
 
 
+
+/* =========================
+    ALGORITMOS DE ORDENAÇÃO
+   ========================= */
+
+int *bubble_sort (int *vetor, int tamanho);
+
 #endif

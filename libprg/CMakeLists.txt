@@ -16,7 +16,8 @@ set(SOURCES
 )
 
 # cria a biblioteca
-add_library(libprg ${SOURCES})
+add_library(libprg ${SOURCES}
+        src/libprg/ordena.c)
 target_include_directories(libprg PUBLIC ${CMAKE_CURRENT_LIST_DIR}/src/include)
 target_compile_features(libprg PUBLIC c_std_17)
 
