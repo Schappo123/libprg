@@ -116,5 +116,5 @@ void lista_encadeada_dupla_ordenada_destruir(nod_t **inicio);
    ========================= */
 
 int *bubble_sort (int *vetor, int tamanho);
-
+int *merge_sort (int *vetor, int esquerda, int direita);
 #endif
