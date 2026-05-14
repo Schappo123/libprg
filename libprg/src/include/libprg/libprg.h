@@ -117,4 +117,24 @@ void lista_encadeada_dupla_ordenada_destruir(nod_t **inicio);
 
 int *bubble_sort (int *vetor, int tamanho);
 int *merge_sort (int *vetor, int esquerda, int direita);
+
+
+/* =========================
+         TABELA HASH
+   ========================= */
+
+typedef struct noh{
+    char *chave;
+    int valor;
+    struct noh *proximo;
+} noh_t;
+
+typedef struct dicionario {
+    int tamanho;
+    noh_t **vetor;
+} dicionario_t;
+
+dicionario_t *criar_dicionario (int m);
+int inserir_hash (dicionario_t *d, char *chave, int valor);
+
 #endif
