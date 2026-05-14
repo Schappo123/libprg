@@ -31,14 +31,14 @@ int *merge (int *vetor, int esquerda, int meio, int direita) {
         } else {
             aux[k] = vetor[j];
             j++;
-    }
-    k++;
-
-    while (i <= meio) {
-    aux[k] = vetor[i];
-        i++;
+        }
         k++;
-    }
+
+        while (i <= meio) {
+            aux[k] = vetor[i];
+            i++;
+            k++;
+        }
         while (j <= direita) {
             aux[k] = vetor[j];
             j++;
@@ -48,7 +48,7 @@ int *merge (int *vetor, int esquerda, int meio, int direita) {
             vetor[i] = aux[i - esquerda];
         }
     }
-
+}
 int *merge_sort (int *vetor, int esquerda, int direita) {
     if (esquerda < direita) {
         int meio = esquerda + (direita - esquerda)/2;
