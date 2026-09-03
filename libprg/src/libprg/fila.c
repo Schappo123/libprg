@@ -7,6 +7,7 @@
 
 void fila_criar (fila_t *f, int capacidade) {
     if (capacidade <= 0) return;
+    fila_t *fila = malloc(sizeof(fila_t));
     f->capacidade = capacidade;
     f->tamanho = 0;
     f->inicio = 0;
