@@ -5,7 +5,7 @@
 
 // FILA GABRIEL //
 
-void fila_criar (fila_t *f, int capacidade) {
+void fila_criar (int capacidade) {
     if (capacidade <= 0) return;
     fila_t *fila = malloc(sizeof(fila_t));
     f->capacidade = capacidade;
