@@ -6,6 +6,7 @@
 // FILA GABRIEL //
 
 void fila_criar (fila_t *f, int capacidade) {
+    if (capacidade <= 0) return;
     f->capacidade = capacidade;
     f->tamanho = 0;
     f->inicio = 0;
@@ -34,9 +35,9 @@ int fila_desinfileirar (fila_t *f) {
     return valor;
 }
 
-int fila_vazia (fila_t *f) {
-    if (f->tamanho == 0) return 1;
-    return 0;
+bool fila_vazia (fila_t *f) {
+    if (f->tamanho == 0) return true;
+    return false;
 }
 
 void fila_imprimir (fila_t *f) {
