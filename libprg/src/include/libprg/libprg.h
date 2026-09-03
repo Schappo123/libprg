@@ -21,20 +21,23 @@ int buscar_na_posicao_da_pilha(pilha_t* p, int posicao);
 void desempilhar_na_posicao(pilha_t* p, int posicao);
 void imprimir_pilha(pilha_t *p);
 
-// |-- FILA --|
+// FILA GABRIEL //
 
-typedef struct fila fila_t;
+typedef struct {
+    int *dados;
+    int inicio;
+    int fim;
+    int tamanho;
+    int capacidade;
+}fila_t;
 
-fila_t* criar_fila(int capacidade);
-void enfileirar(fila_t* fila, int valor);
-void desenfileirar(fila_t* f);
-int inicio_fila(fila_t* f);
-int fim_fila(fila_t* f);
-int tamanho_fila(fila_t* f);
-bool fila_cheia(fila_t* f);
-bool fila_vazia(fila_t* f);
-void listar_fila(fila_t *f);
-void destruir_fila(fila_t* f);
+void fila_criar (fila_t *f, int capacidade);
+int fila_tamanho (fila_t *f);
+void fila_enfileirar (fila_t *f, int elemento);
+int fila_desinfileirar (fila_t *f);
+int fila_vazia (fila_t *f);
+void fila_imprimir (fila_t *f);
+void fila_destruir (fila_t *f);
 
 // |-- LISTA LINEAR --|
 
