@@ -31,7 +31,7 @@ typedef struct {
     int capacidade;
 }fila_t;
 
-void fila_criar (int capacidade);
+fila_t *fila_criar (int capacidade);
 int fila_tamanho (fila_t *f);
 void fila_enfileirar (fila_t *f, int elemento);
 int fila_desinfileirar (fila_t *f);
