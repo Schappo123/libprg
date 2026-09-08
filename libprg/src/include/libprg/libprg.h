@@ -35,23 +35,21 @@ bool fila_vazia (fila_t *f);
 void fila_imprimir (fila_t *f);
 void fila_destruir (fila_t *f);
 
-// |-- LISTA LINEAR --|
+// LISTA LINEAR GABRIEL //
 
-typedef struct lista_linear lista_linear_t;
+typedef struct {
+    int *dados;
+    int capacidade;
+    int tamanho;
+} lista_linear_t;
 
-lista_linear_t* criar_lista_linear(int capacidade, bool ordenada);
-bool lista_cheia(lista_linear_t* ll);
-bool lista_vazia(lista_linear_t* ll);
-void inserir_na_lista(lista_linear_t* ll, int valor);
-int buscar_na_lista(lista_linear_t* ll, int valor);
-void remover_da_lista(lista_linear_t* ll, int valor);
-int tamanho_lista_linear(lista_linear_t* ll);
-void listar_lista_linear(lista_linear_t *ll);
-int inicio_lista_linear(lista_linear_t *ll);
-void destruir_lista(lista_linear_t* ll);
-int buscar_na_posicao_da_lista(lista_linear_t* ll, int posicao);
-void inserir_na_posicao_da_lista(lista_linear_t* ll, int valor, int posicao);
-void remover_na_posicao_da_lista(lista_linear_t* ll, int posicao);
+lista_linear_t *lista_linear_criar (int capacidade);
+int lista_linear_tamanho(lista_linear_t* lista);
+void lista_linear_inserir(lista_linear_t* lista, int valor);
+int lista_linear_remover (lista_linear_t* lista, int valor);
+bool lista_linear_vazia (lista_linear_t* lista);
+void lista_linear_imprimir (lista_linear_t* lista);
+void lista_linear_destruir (lista_linear_t* lista);
 
 // |-- LISTA ENCADEADA --|
 
