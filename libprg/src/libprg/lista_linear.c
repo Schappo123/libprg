@@ -17,19 +17,23 @@ int lista_linear_tamanho(lista_linear_t* lista) {
 }
 
 void lista_linear_inserir(lista_linear_t* lista, int valor) {
+    if (lista->tamanho >= lista->capacidade) return;
+
     lista->dados[lista->tamanho] = valor;
     lista->tamanho++;
 }
 
 int lista_linear_remover (lista_linear_t* lista, int valor) {
-    int index = 0;
     for (int i = 0; i < lista->tamanho; i++) {
         if (lista->dados[i] == valor) {
-            index = i;
+            for (int j = i; j < lista->tamanho - 1; j++) {
+                lista->dados[j] = lista->dados[j + 1];
+            }
+            lista->tamanho--;
+            return 1;
         }
     }
-    lista->dados[index] = lista->dados[lista->tamanho - 1];
-    lista->tamanho--;
+    return 0;
 }
 
 bool lista_linear_vazia (lista_linear_t* lista) {
