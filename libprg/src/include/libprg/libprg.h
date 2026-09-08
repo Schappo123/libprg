@@ -2,24 +2,20 @@
 #define LABORATORIO_LIBPRG_H
 #include <stdbool.h>
 
-//|-- PILHA --|
+// PILHA GABRIEL //
 
-typedef struct pilha pilha_t;
+typedef struct {
+    int *dados;
+    int topo;
+    int capacidade;
+} pilha_t;
 
-pilha_t* criar_pilha(int capacidade);
-void empilhar_pilha(pilha_t* p, int valor);
-int desempilhar_pilha(pilha_t* p);
-int topo_pilha(pilha_t* p);
-int* listar_pilha(pilha_t* p);
-int tamanho_pilha(pilha_t* p);
-void destruir_pilha(pilha_t* p);
-void empilhar_na_posicao(pilha_t *p, int valor, int posicao);
-int limitar_posicao_da_pilha(pilha_t* p, int posicao);
-bool pilha_cheia(pilha_t *p);
-bool pilha_vazia(pilha_t* p);
-int buscar_na_posicao_da_pilha(pilha_t* p, int posicao);
-void desempilhar_na_posicao(pilha_t* p, int posicao);
-void imprimir_pilha(pilha_t *p);
+pilha_t *pilha_criar (int capacidade);
+int pilha_tamanho (pilha_t *p);
+void pilha_empilhar (pilha_t *p, int valor);
+int pilha_desempilhar (pilha_t *p);
+void pilha_imprimir (pilha_t *p);
+void pilha_destruir (pilha_t *p);
 
 // FILA GABRIEL //
 
