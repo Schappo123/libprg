@@ -3,8 +3,11 @@
 
 int main () {
 
-    no_t *lista = lista_encadeada_criar(5);
+    lista_encadeada_t lista;
+    lista.inicio = NULL;
+    lista.tamanho = 0;
 
+    lista_encadeada_inserir(&lista, 5);
 
     return 0;
 }
