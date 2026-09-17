@@ -51,4 +51,22 @@ bool lista_linear_vazia (lista_linear_t* lista);
 void lista_linear_imprimir (lista_linear_t* lista);
 void lista_linear_destruir (lista_linear_t* lista);
 
+//LISTA ENCADEADA GABRIEL //
+
+typedef struct no_t{
+    int dados;
+    struct no_t *proximo;
+} no_t;
+
+typedef struct {
+    no_t *inicio;
+    int tamanho;
+} lista_encadeada_t;
+
+no_t *lista_encadeada_criar (int valor);
+void lista_encadeada_inserir (no_t **inicio, int valor);
+void lista_encadeada_remover (no_t **inicio, int valor);
+void lista_encadeada_imprimir (no_t **inicio);
+void lista_encadeada_destruir (no_t **inicio);
+
 #endif //LABORATORIO_LIBPRG_H
