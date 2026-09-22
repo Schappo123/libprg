@@ -37,14 +37,13 @@ void lista_encadeada_remover (no_t **inicio, int valor) {
     }
 }
 
-void lista_encadeada_imprimir (no_t **inicio) {
+void lista_encadeada_imprimir (no_t *inicio) {
     if (inicio == NULL) return;
-    no_t *atual = *inicio;
+    no_t *atual = inicio;
 
     while (atual) {
-        no_t *proximo = atual->proximo;
         printf("%d ", atual->dados);
-        atual = proximo;
+        atual = atual->proximo;
     }
 }
 

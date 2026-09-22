@@ -66,7 +66,7 @@ typedef struct {
 no_t *lista_encadeada_criar (int valor);
 void lista_encadeada_inserir (no_t **inicio, int valor);
 void lista_encadeada_remover (no_t **inicio, int valor);
-void lista_encadeada_imprimir (no_t **inicio);
+void lista_encadeada_imprimir (no_t *inicio);
 void lista_encadeada_destruir (no_t **inicio);
 
 #endif //LABORATORIO_LIBPRG_H
