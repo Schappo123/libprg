@@ -67,7 +67,7 @@ no_t *lista_encadeada_criar_no (int valor);
 void lista_encadeada_inserir (lista_encadeada_t *lista, int valor);
 void lista_encadeada_remover (lista_encadeada_t *lista, int valor);
 int lista_encadeada_tamanho (lista_encadeada_t *lista);
-void lista_encadeada_imprimir (no_t *inicio);
-void lista_encadeada_destruir (no_t **inicio);
+void lista_encadeada_imprimir (lista_encadeada_t *lista);
+void lista_encadeada_destruir (lista_encadeada_t *lista);
 
 #endif //LABORATORIO_LIBPRG_H
