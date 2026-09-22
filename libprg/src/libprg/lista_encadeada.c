@@ -9,11 +9,11 @@ no_t *lista_encadeada_criar (int valor) {
     return no;
 }
 
-void lista_encadeada_inserir (no_t **inicio, int valor, lista_encadeada_t *lista) {
-    if (inicio == NULL) return;
+void lista_encadeada_inserir (lista_encadeada_t *lista, int valor) {
+    if (lista == NULL) return;
     no_t *novo_no = lista_encadeada_criar(valor);
-    novo_no->proximo = *inicio;
-    *inicio = novo_no;
+    novo_no->proximo = lista->inicio;
+    lista->inicio = novo_no;
     lista->tamanho++;
 }
 

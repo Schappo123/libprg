@@ -7,7 +7,5 @@ int main () {
     lista.inicio = NULL;
     lista.tamanho = 0;
 
-    lista_encadeada_inserir(&lista, 5);
-
     return 0;
 }
