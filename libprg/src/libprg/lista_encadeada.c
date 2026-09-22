@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "libprg/libprg.h"
 
-no_t *lista_encadeada_criar (int valor) {
+no_t *lista_encadeada_criar_no (int valor) {
     no_t *no = malloc(sizeof(no_t));
     no->dados = valor;
     no->proximo = NULL;
@@ -10,20 +10,16 @@ no_t *lista_encadeada_criar (int valor) {
 }
 
 void lista_encadeada_inserir (lista_encadeada_t *lista, int valor) {
-    if (lista == NULL) return;
-    no_t *novo_no = lista_encadeada_criar(valor);
+    if (lista->inicio == NULL) return;
+    no_t *novo_no = lista_encadeada_criar_no(valor);
     novo_no->proximo = lista->inicio;
     lista->inicio = novo_no;
     lista->tamanho++;
 }
 
-int lista_encadeada_tamanho (lista_encadeada_t *lista) {
-    return lista->tamanho;
-}
-
-void lista_encadeada_remover (no_t **inicio, int valor) {
-    if (inicio == NULL) return;
-    no_t *atual = *inicio;
+void lista_encadeada_remover (lista_encadeada_t *lista, int valor) {
+    if (lista->inicio == NULL) return;
+    no_t *atual = lista->inicio;
     no_t *anterior = NULL;
 
     while (atual) {
@@ -32,7 +28,7 @@ void lista_encadeada_remover (no_t **inicio, int valor) {
                 anterior->proximo = atual->proximo;
             }
             else {
-                *inicio = atual->proximo;
+                lista->inicio = atual->proximo;
             }
             free(atual);
             break;
@@ -40,6 +36,10 @@ void lista_encadeada_remover (no_t **inicio, int valor) {
         anterior = atual;
         atual = atual->proximo;
     }
+}
+
+int lista_encadeada_tamanho (lista_encadeada_t *lista) {
+    return lista->tamanho;
 }
 
 void lista_encadeada_imprimir (no_t *inicio) {
