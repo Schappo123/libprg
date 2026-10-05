@@ -2,7 +2,7 @@
 #define LABORATORIO_LIBPRG_H
 #include <stdbool.h>
 
-// PILHA GABRIEL //
+// PILHA//
 
 typedef struct {
     int *dados;
@@ -17,7 +17,7 @@ int pilha_desempilhar (pilha_t *p);
 void pilha_imprimir (pilha_t *p);
 void pilha_destruir (pilha_t *p);
 
-// FILA GABRIEL //
+// FILA//
 
 typedef struct {
     int *dados;
@@ -35,7 +35,7 @@ bool fila_vazia (fila_t *f);
 void fila_imprimir (fila_t *f);
 void fila_destruir (fila_t *f);
 
-// LISTA LINEAR GABRIEL //
+// LISTA LINEAR//
 
 typedef struct {
     int *dados;
@@ -51,7 +51,7 @@ bool lista_linear_vazia (lista_linear_t* lista);
 void lista_linear_imprimir (lista_linear_t* lista);
 void lista_linear_destruir (lista_linear_t* lista);
 
-//LISTA ENCADEADA GABRIEL //
+//LISTA ENCADEADA//
 
 typedef struct no_t{
     int dados;
@@ -69,5 +69,14 @@ void lista_encadeada_remover (lista_encadeada_t *lista, int valor);
 int lista_encadeada_tamanho (lista_encadeada_t *lista);
 void lista_encadeada_imprimir (lista_encadeada_t *lista);
 void lista_encadeada_destruir (lista_encadeada_t *lista);
+
+//ALGORITMO DE ORDENAÇÃO//
+
+typedef struct {
+    int dados[100];
+    int tamanho;
+} ordenacao_t;
+
+
 
 #endif //LABORATORIO_LIBPRG_H
