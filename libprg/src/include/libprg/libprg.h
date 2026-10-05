@@ -77,6 +77,8 @@ typedef struct {
     int tamanho;
 } ordenacao_t;
 
-
+void bubbleSort(ordenacao_t *v);
+void insertionSort(ordenacao_t *v);
+void selectionSort(ordenacao_t *v);
 
 #endif //LABORATORIO_LIBPRG_H

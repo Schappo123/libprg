@@ -14,7 +14,7 @@ set(SOURCES
         src/libprg/lista_linear.c
         src/libprg/lista_encadeada.c
         src/libprg/lista_encadeada_dupla.c
-        src/libprg/alg_ord_troca.c
+        src/libprg/ordena.c
         src/libprg/arvore_binaria.c
         src/libprg/dicionario.c
         main.c
