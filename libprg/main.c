@@ -3,9 +3,11 @@
 
 int main () {
 
-    lista_encadeada_t lista;
-    lista.inicio = NULL;
-    lista.tamanho = 0;
+    ordenacao_t vetor = {{100,5,87,2,13,22},6};
+    mergeSort(&vetor, 0, 5);
 
+    for (int i = 0; i < 6; i++) {
+        printf("%d", vetor.dados[i]);
+    }
     return 0;
 }
