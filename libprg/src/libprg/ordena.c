@@ -46,3 +46,36 @@ void selectionSort(ordenacao_t *v) {
     }
 }
 
+void intercalar(ordenacao_t *v, int inicio, int meio, int fim) {
+    int temp[100];
+    int i = inicio;
+    int j = meio + 1;
+    int k = inicio;
+
+    while (i <= meio && j <= fim) {
+        if (v->dados[i] < v->dados[j]) {
+            temp[k++] = v->dados[i++];
+        } else {
+            temp[k++] = v->dados[j++];
+        }
+    }
+
+    while (i <= meio) {
+        temp[k++] = v->dados[i++];
+    }
+    while (j <= fim) {
+        temp[k++] = v->dados[j++];
+    }
+    for (int i = inicio; i <= fim; i++) {
+        v->dados[i] = temp[i];
+    }
+}
+
+void mergeSort (ordenacao_t *v, int inicio, int fim) {
+    if (inicio < fim) {
+        int meio = inicio + (fim - inicio) / 2;
+        mergeSort(v, inicio, meio);
+        mergeSort(v, meio + 1, fim);
+        intercalar(v, inicio, meio, fim);
+    }
+}
