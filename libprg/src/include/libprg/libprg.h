@@ -83,5 +83,7 @@ void insertionSort(ordenacao_t *v);
 void selectionSort(ordenacao_t *v);
 void intercalar(ordenacao_t *v, int inicio, int meio, int fim);
 void mergeSort (ordenacao_t *v, int inicio, int fim);
+int particionar (ordenacao_t *v, int inicio, int fim);
+void quickSort (ordenacao_t *v, int inicio, int fim);
 
 #endif //LABORATORIO_LIBPRG_H

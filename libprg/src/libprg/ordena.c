@@ -79,3 +79,25 @@ void mergeSort (ordenacao_t *v, int inicio, int fim) {
         intercalar(v, inicio, meio, fim);
     }
 }
+
+int particionar (ordenacao_t *v, int inicio, int fim) {
+    int pivo = v->dados[fim];
+    int i = (inicio - 1);
+
+    for (int j = inicio; j <= fim; j++) {
+        if (v->dados[j] <= pivo) {
+            i++;
+            trocar(&v->dados[i], &v->dados[j]);
+        }
+    }
+    trocar(&v->dados[i+1], &v->dados[fim]);
+    return i + 1;
+}
+
+void quickSort (ordenacao_t *v, int inicio, int fim) {
+    if (inicio < fim) {
+        int p_indice = particionar(v, inicio, fim);
+        quickSort(v, inicio, p_indice - 1);
+        quickSort(v, p_indice + 1, fim);
+    }
+}
