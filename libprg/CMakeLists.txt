@@ -18,6 +18,7 @@ set(SOURCES
         src/libprg/arvore_binaria.c
         src/libprg/dicionario.c
         main.c
+        src/libprg/arvore_avl.c
 )
 
 add_library(libprg ${SOURCES})

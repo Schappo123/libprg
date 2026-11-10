@@ -86,4 +86,59 @@ void mergeSort (ordenacao_t *v, int inicio, int fim);
 int particionar (ordenacao_t *v, int inicio, int fim);
 void quickSort (ordenacao_t *v, int inicio, int fim);
 
+// LISTA ENCADEADA DUPLA //
+
+typedef struct no_lista {
+    int valor;
+    struct no_lista *anterior;
+    struct no_lista *proximo;
+} no_lista_t;
+
+typedef struct {
+    no_lista_t *inicio;
+    no_lista_t *fim;
+    int tamanho;
+} lista_dupla_t;
+
+void lista_inicializar(lista_dupla_t *lista);
+int lista_inserir_inicio(lista_dupla_t *lista, int valor);
+int lista_inserir_fim(lista_dupla_t *lista, int valor);
+int lista_buscar(lista_dupla_t *lista, int valor);
+int lista_remover(lista_dupla_t *lista, int valor);
+void lista_percorrer(lista_dupla_t *lista);
+void lista_libera(lista_dupla_t *lista);
+
+// ARBORE BINARIA DE PESQUISA //
+
+typedef struct no_abp {
+    int valor;
+    struct no_abp *esquerda;
+    struct no_abp *direita;
+} no_abp_t;
+
+typedef no_abp_t* abp_t;
+
+void abp_inicializar(abp_t *raiz);
+int abp_inserir(abp_t *raiz, int valor);
+int abp_buscar(abp_t raiz, int valor);
+int abp_remover(abp_t *raiz, int valor);
+void abp_libera(abp_t *raiz);
+
+// ARVORE AVL //
+
+typedef struct no_avl {
+    int valor;
+    int altura;
+    struct no_avl *esquerda;
+    struct no_avl *direita;
+} no_avl_t;
+
+typedef no_avl_t* avl_t;
+
+void avl_inicializar(avl_t *raiz);
+int avl_inserir(avl_t *raiz, int valor);
+int avl_buscar(avl_t raiz, int valor);
+int avl_remover(avl_t *raiz, int valor);
+void avl_libera(avl_t *raiz);
+
 #endif //LABORATORIO_LIBPRG_H
