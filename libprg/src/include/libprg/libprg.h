@@ -100,13 +100,13 @@ typedef struct {
     int tamanho;
 } lista_dupla_t;
 
-void lista_inicializar(lista_dupla_t *lista);
-int lista_inserir_inicio(lista_dupla_t *lista, int valor);
-int lista_inserir_fim(lista_dupla_t *lista, int valor);
-int lista_buscar(lista_dupla_t *lista, int valor);
-int lista_remover(lista_dupla_t *lista, int valor);
-void lista_percorrer(lista_dupla_t *lista);
-void lista_libera(lista_dupla_t *lista);
+void lista_dupla_inicializar(lista_dupla_t *lista);
+int lista_dupla_inserir_inicio(lista_dupla_t *lista, int valor);
+int lista_dupla_inserir_fim(lista_dupla_t *lista, int valor);
+int lista_dupla_buscar(lista_dupla_t *lista, int valor);
+int lista_dupla_remover(lista_dupla_t *lista, int valor);
+void lista_dupla_percorrer(lista_dupla_t *lista);
+void lista_dupla_libera(lista_dupla_t *lista);
 
 // ARBORE BINARIA DE PESQUISA //
 

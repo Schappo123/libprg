@@ -3,13 +3,13 @@
 #include <stdlib.h>
 #include "libprg/libprg.h"
 
-void lista_inicializar(lista_dupla_t *lista) {
+void lista_dupla_inicializar(lista_dupla_t *lista) {
     lista->inicio = NULL;
     lista->fim = NULL;
     lista->tamanho = 0;
 }
 
-int lista_inserir_inicio(lista_dupla_t *lista, int valor) {
+int lista_dupla_inserir_inicio(lista_dupla_t *lista, int valor) {
     no_lista_t *novo = malloc(sizeof(no_lista_t));
 
     if (novo == NULL)
@@ -30,7 +30,7 @@ int lista_inserir_inicio(lista_dupla_t *lista, int valor) {
     return 1;
 }
 
-int lista_inserir_fim(lista_dupla_t *lista, int valor) {
+int lista_dupla_inserir_fim(lista_dupla_t *lista, int valor) {
     no_lista_t *novo = malloc(sizeof(no_lista_t));
 
     if (novo == NULL)
@@ -51,7 +51,7 @@ int lista_inserir_fim(lista_dupla_t *lista, int valor) {
     return 1;
 }
 
-int lista_buscar(lista_dupla_t *lista, int valor) {
+int lista_dupla_buscar(lista_dupla_t *lista, int valor) {
     no_lista_t *atual = lista->inicio;
 
     while (atual != NULL) {
@@ -64,7 +64,7 @@ int lista_buscar(lista_dupla_t *lista, int valor) {
     return 0;
 }
 
-int lista_remover(lista_dupla_t *lista, int valor) {
+int lista_dupla_remover(lista_dupla_t *lista, int valor) {
     no_lista_t *atual = lista->inicio;
 
     while (atual != NULL && atual->valor != valor)
@@ -89,7 +89,7 @@ int lista_remover(lista_dupla_t *lista, int valor) {
     return 1;
 }
 
-void lista_percorrer(lista_dupla_t *lista) {
+void lista_dupla_percorrer(lista_dupla_t *lista) {
     no_lista_t *atual = lista->inicio;
 
     while (atual != NULL) {
@@ -98,7 +98,7 @@ void lista_percorrer(lista_dupla_t *lista) {
     }
 }
 
-void lista_libera(lista_dupla_t *lista) {
+void lista_dupla_libera(lista_dupla_t *lista) {
     no_lista_t *atual = lista->inicio;
 
     while (atual != NULL) {
