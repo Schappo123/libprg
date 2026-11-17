@@ -52,6 +52,18 @@ void fila_imprimir (fila_t *f) {
     }
 }
 
+int fila_buscar (fila_t *f, int elemento) {
+    int posicao = f->inicio;
+
+    for (int i = 0; i < f->tamanho; i++) {
+        if (f->dados[posicao] == elemento) {
+            return 1;
+        }
+        posicao = (posicao + 1) % f->capacidade;
+    }
+    return 0;
+}
+
 void fila_destruir (fila_t *f) {
     free(f->dados);
     f->dados = NULL;
