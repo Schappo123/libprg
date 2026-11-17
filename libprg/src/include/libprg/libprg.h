@@ -33,6 +33,7 @@ void fila_enfileirar (fila_t *f, int elemento);
 int fila_desinfileirar (fila_t *f);
 bool fila_vazia (fila_t *f);
 void fila_imprimir (fila_t *f);
+int fila_buscar (fila_t *f, int elemento);
 void fila_destruir (fila_t *f);
 
 // LISTA LINEAR//
